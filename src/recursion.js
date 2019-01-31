@@ -77,7 +77,27 @@ var sumBelow = function(n) {
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
+  let rangeDiff = Math.abs(x-y)
+  console.log(`Calling ${x} and ${y}`)
+  console.log('rangeDiff:', rangeDiff)
+  if (rangeDiff <= 1) {
+    return []
+  } else {
+    if (x < y) {
+      return [x+1].concat(range(x+1, y))
+    } else if (x > y) {
+    return [x-1].concat(range(x-1, y))
+    }
+  }
 };
+
+
+// (1,4) -> [2,3}first number is lower
+// No - has to be recursive call with range - IGNORE start with empty array -> keep pushing 1 by one, working up
+// Concat approach -> base case is x === y -> return []
+//    return [x + 1].concat(recursive call).concat[y-1]
+
+
 
 // 7. Compute the exponent of a number.
 // The exponent of a number says how many times the base number is used as a factor.
