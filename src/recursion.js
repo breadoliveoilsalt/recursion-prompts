@@ -193,7 +193,34 @@ var multiply = function(x, y) {
 
 // 13. Write a function that divides two numbers without using the / operator or
 // Math methods to arrive at an approximate quotient (ignore decimal endings).
+
+// expect(divide(2, 1)).to.equal(~~(2 / 1));
+// expect(divide(17, 5)).to.equal(~~(17 / 5));
+// expect(divide(78, 453)).to.equal(~~(78 / 453));
+// expect(divide(-79, 82)).to.equal(~~(-79 / 82));
+// expect(divide(-275, -582)).to.equal(~~(-275 / -582));
+// expect(divide(0, 32)).to.equal(~~(0 / 32));
+// expect(divide(0, 0)).to.be.NaN;
+
 var divide = function(x, y) {
+  let absX = x > 0 ? x : -x
+  let absY = y > 0 ? y : -y
+  if (y === 0) {
+    return NaN
+  } else if (absY > absX) {
+    return 0
+  } else if (absX === absY) {
+    return 1
+  } else if (absX - absY < absY) {
+    return 1
+  } else {
+    if ((x > 0 && y < 0) || (x < 0 && y > 0)) {
+      return -(1 + (divide(absX - absY, absY)))
+    } else {
+      return 1 + divide(absX - absY, absY)
+    }
+
+  }
 };
 
 // 14. Find the greatest common divisor (gcd) of two positive numbers. The GCD of two
