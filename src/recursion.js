@@ -78,8 +78,8 @@ var sumBelow = function(n) {
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
   let rangeDiff = Math.abs(x-y)
-  console.log(`Calling ${x} and ${y}`)
-  console.log('rangeDiff:', rangeDiff)
+  // console.log(`Calling ${x} and ${y}`)
+  // console.log('rangeDiff:', rangeDiff)
   if (rangeDiff <= 1) {
     return []
   } else {
@@ -165,15 +165,17 @@ var palindrome = function(string) {
 // modulo(5,2) // 1
 // modulo(17,5) // 2
 // modulo(22,6) // 4
-var modulo = function(x, y) {
-  if ( x > y && x - y < y) {
-    return x - y
-  } else if ( x < y && x - y < y) {
-    return x
-  } else {
-    return modulo(x-y, y)
-  }
-};
+
+// exceeds maximum call stack.  To come back to:
+// var modulo = function(x, y) {
+//   if ( x > y && x - y < y) {
+//     return x - y
+//   } else if ( x < y && x - y < y) {
+//     return x
+//   } else {
+//     return modulo(x-y, y)
+//   }
+// };
 
 // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
@@ -202,6 +204,7 @@ var multiply = function(x, y) {
 // expect(divide(0, 32)).to.equal(~~(0 / 32));
 // expect(divide(0, 0)).to.be.NaN;
 
+// Theme here was to get the absolute values first.
 var divide = function(x, y) {
   let absX = x > 0 ? x : -x
   let absY = y > 0 ? y : -y
@@ -228,8 +231,22 @@ var divide = function(x, y) {
 // gcd(4,36); // 4
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
+
+// the lesson here is to re-run with the lower number and the remainder
 var gcd = function(x, y) {
+  let greaterNum = x < y ? y : x
+  let lesserNum = y <= x ? y : x
+
+  if (greaterNum < 0 || lesserNum < 0) {
+    return null
+  } else if ( greaterNum === 0 || lesserNum === 0) {
+    return greaterNum
+  } else {
+    let remainder = greaterNum % lesserNum
+    return gcd(lesserNum, remainder)
+  }
 };
+
 
 // 15. Write a function that compares each character of two strings and returns true if
 // both are identical.
